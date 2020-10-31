@@ -1,5 +1,7 @@
 
-# Lint a YAML
+![Lint Trilogy Logo](Lint_Trilogy_200px.jpg)
+
+# Lint Trilogy
 
 ## TL;DR
 This project provides some tools to lint your YAML or JSON via HTTP requests, including a comfortable form based HTML page and some simple POST interfaces which are returning the result e.g. as JSON or CSV.
