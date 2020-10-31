@@ -1,0 +1,10 @@
+---  # lint a YAML
+
+features:
+  - editor with automatic residing
+  - and line numbering
+
+interfaces:
+  interactive: html based editor
+  automation:
+    results_in: ['json', 'csv', 'text']
