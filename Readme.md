@@ -43,7 +43,7 @@ These are the interfaces to lint a YAML. Choose one according to your needs.
 This page offers a comfortable HTML form to enter a YAML and lint it. On clicking the button, the app checks the YAML and gives feedback as an unordered list, or, in best case, tells you that the YAML ist valid.
  
 ### /lint/yaml/csv
-This interface accepts POST requests and awaits the YAML in the field _yaml_. Response is given as CSV list, which remains empty (zero lines) if the YAML is valid.
+This interface accepts POST requests and awaits the YAML in the field _yaml_. Response is given as CSV list (content type text/csv), which remains empty (zero lines) if the YAML is valid.
 
 Example:
 ```
@@ -53,7 +53,7 @@ $ curl -X POST -d 'yaml=xxx '  http://192.168.99.101/lint/yaml/csv
 ```
 
 ### /lint/yaml/json
-This interface accepts POST requests and awaits the YAML in the field _yaml_. Response is given as JSON structure with the man key "value" as response which is telling with a _true_ or _false_ if the YAMl is valid. If there's errors, you'll find an array with line number, column and description. 
+This interface accepts POST requests and awaits the YAML in the field _yaml_. Response is given as JSON structure (content type application/json) with the man key "value" as response which is telling with a _true_ or _false_ if the YAMl is valid. If there's errors, you'll find an array with line number, column and description. 
 
 Examples:
 ```
@@ -79,7 +79,7 @@ $ curl -X POST -d 'yaml=xxx '  http://192.168.99.101/lint/yaml/json
 ```
 
 ### /lint/yaml/valid
-This interface accepts POST requests and awaits the YAML in the field _yaml_. Response is given as simply _true_ or _false_ in mime-type text/plain.
+This interface accepts POST requests and awaits the YAML in the field _yaml_. Response is given as simply _true_ or _false_ (content type text/plain).
 
 Example:
 ```
@@ -96,7 +96,7 @@ These are the interfaces to lint a JSON. Choose one according to your needs. The
 This page offers a comfortable HTML form to enter a JSON and lint it. On clicking the button, the app checks the JSON and gives feedback as an unordered list, or, in best case, tells you that the JSON ist valid.
  
 ### /lint/json/csv
-This interface accepts POST requests and awaits the JSON in the field _json_. Response is given as CSV list, which remains empty (zero lines) if the JSON is valid.
+This interface accepts POST requests and awaits the JSON in the field _json_. Response is given as CSV list (content type text/csv), which remains empty (zero lines) if the JSON is valid.
 
 Example:
 ```
@@ -105,7 +105,7 @@ $ curl -X POST -d 'json={ "this": is no json }'  http://192.168.99.101/lint/json
 ```
 
 ### /lint/json/json
-This interface accepts POST requests and awaits the JSON in the field _json_. Response is given as JSON structure with the man key "value" as response which is telling with a _true_ or _false_ if the YAMl is valid. If there's errors, you'll find an array with line number, column and description. 
+This interface accepts POST requests and awaits the JSON in the field _json_. Response is given as JSON structure (content type application/json) with the man key "value" as response which is telling with a _true_ or _false_ if the YAMl is valid. If there's errors, you'll find an array with line number, column and description. 
 
 Examples:
 ```
@@ -126,7 +126,7 @@ $ curl -X POST -d 'json={ "this": is no json }'  http://192.168.99.101/lint/json
 ```
 
 ### /lint/json/valid
-This interface accepts POST requests and awaits the JSON in the field _json_. Response is given as simply _true_ or _false_ in mime-type text/plain.
+This interface accepts POST requests and awaits the JSON in the field _json_. Response is given as simply _true_ or _false_ (content type text/plain).
 
 Example:
 ```
