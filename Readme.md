@@ -17,6 +17,16 @@ In the future, I want to add more linters (e.g. for XML) or converters (e.g. bas
 
 Btw., the name of the project refers to the [Dollars Trilogy](https://en.wikipedia.org/wiki/Dollars_Trilogy).
 
+## Credits
+This project is based on the valuable work of many other people. Thanks to the following people or organizations:
+* Sebastián Ramírez (aka [tiangolo](https://github.com/tiangolo)) for the docker image
+* Jacob Kelley for [Behave.js](https://jakiestfu.github.io/Behave.js/) which is the foundation for the [editor](https://embed.plnkr.co/plunk/EKgvbm).
+
+## Licensing
+The code is under MIT license. The lint trilogy logo is under CC BY-SA 4.0.
+
+---
+
 ## Docker
 Build an image and run it with the following commands:
 ```
@@ -24,15 +34,9 @@ docker build -t lint_a_yaml .
 docker run  -p 80:80  --name lintayaml lint_a_yaml
 ```
 
-## Credits
-This project is based on the valuable work of many other people. Thanks to the following people or organizations:
-* Sebastián Ramírez (aka [tiangolo](https://github.com/tiangolo)) for the docker image
-* Jacob Kelley for [Behave.js](https://jakiestfu.github.io/Behave.js/) which is the foundation for the [editor](https://embed.plnkr.co/plunk/EKgvbm).
-
-
 ----
 
-## Lint your YAML
+## A Fistful of YAML
 These are the interfaces to lint a YAML. Choose one according to your needs.
 
 ### /lint/yaml/form
@@ -85,8 +89,8 @@ true
 
 ----
 
-## Lint your JSON
-These are the interfaces to lint a JSON. Choose one according to your needs.
+## The Good, the Bad and the JSON
+These are the interfaces to lint a JSON. Choose one according to your needs. The basic python json library stops at the first error so you always get a list/array with just the next error as answer.
 
 ### /lint/json/form
 This page offers a comfortable HTML form to enter a JSON and lint it. On clicking the button, the app checks the JSON and gives feedback as an unordered list, or, in best case, tells you that the JSON ist valid.
@@ -96,9 +100,8 @@ This interface accepts POST requests and awaits the JSON in the field _json_. Re
 
 Example:
 ```
-$ curl -X POST -d 'json=xxx '  http://192.168.99.101/lint/json/csv
-1,1,missing document start "---"
-1,4,trailing spaces
+$ curl -X POST -d 'json={ "this": is no json }'  http://192.168.99.101/lint/json/csv
+1,11,Expecting value
 ```
 
 ### /lint/json/json
@@ -106,20 +109,15 @@ This interface accepts POST requests and awaits the JSON in the field _json_. Re
 
 Examples:
 ```
-$ curl -X POST -d 'json=---'  http://192.168.99.101/lint/json/json
+$ curl -X POST -d 'json={}'  http://192.168.99.101/lint/json/json
 {"valid": true}
 
-$ curl -X POST -d 'json=xxx '  http://192.168.99.101/lint/json/json
+$ curl -X POST -d 'json={ "this": is no json }'  http://192.168.99.101/lint/json/json
 {
     "errors": [
         {
-            "column": 1,
-            "desc": "missing document start \"---\"",
-            "line": 1
-        },
-        {
-            "column": 4,
-            "desc": "trailing spaces",
+            "column": 11,
+            "desc": "Expecting value",
             "line": 1
         }
     ],
@@ -132,7 +130,7 @@ This interface accepts POST requests and awaits the JSON in the field _json_. Re
 
 Example:
 ```
-$ curl -X POST -d 'json=---'  http://192.168.99.101/lint/json/valid
-true
+$ curl -X POST -d 'json={ "this": is no json }'  http://192.168.99.101/lint/json/csv
+false
 ```
 

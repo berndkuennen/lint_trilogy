@@ -9,6 +9,7 @@ from yamllint.config import YamlLintConfig
 from yamllint import linter
 
 import json
+from html import escape
 
 # configure yaml linter
 conf = YamlLintConfig(file='.yamllint')
@@ -45,7 +46,7 @@ def generate_form(yaml2lint, message):
 	<!-- autonumber & resize example inspired by https://embed.plnkr.co/plunk/EKgvbm -->
 	<div class="container">
 		<div class="line-nums"><span>1</span></div>
-		<textarea id="editor" name="yaml" autofocus >""" + yaml2lint +"""</textarea>
+		<textarea id="editor" name="yaml" autofocus >""" + escape(yaml2lint) +"""</textarea>
 	</div>
 	<br/>
 	<input type="submit" />
@@ -71,7 +72,7 @@ def lint_yamlx():
         if errors:
             message += "The YaML is <b style='color:red;'>invalid</b>.<br/>Found the following errors in yaml file:\n<ul>"
             for error in errors:
-                message += "<li>Line " + str(error.line) + ", column " + str(error.column) + ": " + error.desc + "\n"
+                message += "<li>Line " + str(error.line) + ", column " + str(error.column) + ": " + escape(error.desc) + "\n"
             message += "</ul>"
         else:
             message += "The YaML is <b style='color:green;'>valid</b>.\n"

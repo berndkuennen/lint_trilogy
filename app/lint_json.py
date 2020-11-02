@@ -6,7 +6,7 @@ from flask import Response, stream_with_context
 lint_json = Blueprint('lint_json', __name__)
 
 import json
-
+from html import escape
 
 #== take the posted json (if any) and lint it
 def lint_the_json():
@@ -50,7 +50,7 @@ def generate_form(json2lint, message):
 	<!-- autonumber & resize example inspired by https://embed.plnkr.co/plunk/EKgvbm -->
 	<div class="container">
 		<div class="line-nums"><span>1</span></div>
-		<textarea id="editor" name="json" autofocus >""" + json2lint +"""</textarea>
+		<textarea id="editor" name="json" autofocus >""" + escape(json2lint) +"""</textarea>
 	</div>
 	<br/>
 	<input type="submit" />
@@ -76,7 +76,7 @@ def lint_jsonx():
         if errors:
             message += "The JSON is <b style='color:red;'>invalid</b>.<br/>Found the following errors in json file:\n<ul>"
             for error in errors:
-                message += "<li>Line " + str(error['line']) + ", column " + str(error['column']) + ": " + error['desc'] + "\n"
+                message += "<li>Line " + str(error['line']) + ", column " + str(error['column']) + ": " + escape(error['desc']) + "\n"
             message += "</ul>"
         else:
             message += "The JSON is <b style='color:green;'>valid</b>.\n"
