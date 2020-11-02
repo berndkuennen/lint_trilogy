@@ -23,7 +23,7 @@ This project is based on the valuable work of many other people. Thanks to the f
 * Jacob Kelley for [Behave.js](https://jakiestfu.github.io/Behave.js/) which is the foundation for the [editor](https://embed.plnkr.co/plunk/EKgvbm).
 
 ## Licensing
-The code is under MIT license. The lint trilogy logo is under CC BY-SA 4.0.
+The code is under [MIT license](License.txt). The lint trilogy logo is under CC BY-SA 4.0.
 
 ---
 
