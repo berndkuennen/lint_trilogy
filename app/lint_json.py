@@ -8,19 +8,18 @@ lint_json = Blueprint('lint_json', __name__)
 import json
 from html import escape
 
+from general import generate_form
+
 #== take the posted json (if any) and lint it
 def lint_the_json():
     # works for key:value POSTs
-    data = request.form['json'] # a multidict containing POST data
+    data = request.form['data2lint'] # a multidict containing POST data
     try:
         j = json.loads(data)
         #print("json is valid")
         return []
     except json.JSONDecodeError as err:
         #print("json is invalid")
-        #print(str(err.lineno) + "," + str(err.colno) + ": " + err.msg )
-        #lines = str.splitlines(data)
-        #print(lines[err.lineno-1])
         error = {}
         error['line']   = err.lineno
         error['column'] = err.colno
@@ -29,7 +28,7 @@ def lint_the_json():
 
 
 #== generate HTML for the editor
-def generate_form(json2lint, message):
+def generate_html(data2lint, message, action):
     html = """
 <!DOCTYPE html>
 <html>
@@ -44,19 +43,12 @@ def generate_form(json2lint, message):
 
   <body>
         <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="40" /></a><h1>The Good, the Bad and the JSON</h1>
-	
-	<form action="/lint/json/form" method="POST">
+""" + generate_form(data2lint, action) + """        <center><div class="message">""" + message + """</div></center>
 
-	<!-- autonumber & resize example inspired by https://embed.plnkr.co/plunk/EKgvbm -->
-	<div class="container">
-		<div class="line-nums"><span>1</span></div>
-		<textarea id="editor" name="json" autofocus >""" + escape(json2lint) +"""</textarea>
-	</div>
-	<br/>
-	<input type="submit" />
-	
-        </form>
-        <center><div class="message">""" + message + """</div></center>
+  <script>
+    setEditorFocus();
+  </script>
+
   </body>
 
 </html>
@@ -69,7 +61,7 @@ def generate_form(json2lint, message):
 @lint_json.route('/lint/json/form', methods = ['POST','GET'])
 def lint_jsonx():
     if request.method == 'GET':
-        return generate_form("{\n  \"key\": \"enter your json here\"\n}","")
+        return generate_html("{\n  \"key\": \"enter your json here\"\n}","","/lint/json/form")
     else:
         message = "<h3>Result</h3><p>"
         errors = lint_the_json()
@@ -78,11 +70,13 @@ def lint_jsonx():
             for error in errors:
                 message += "<li>Line " + str(error['line']) + ", column " + str(error['column']) + ": " + escape(error['desc']) + "\n"
             message += "</ul>"
+            data4form = request.form['data2lint']
         else:
             message += "The JSON is <b style='color:green;'>valid</b>.\n"
+            data4form = json.dumps( json.loads(request.form['data2lint']), indent=4, sort_keys=True )
         message += "</p>"
 
-        return generate_form( request.form['json'], message )
+        return generate_html( data4form, message, "/lint/json/form" )
 
 
 #== answer POST with JSON

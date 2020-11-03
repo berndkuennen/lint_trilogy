@@ -42,3 +42,15 @@ window.onload = function(){
   	autoIndent: 	true
   });
 };
+
+
+
+function setEditorFocus() {
+  // sometimes autofocs on textarea doesn't work => js as fallback
+  txt_obj = document.getElementById('editor');
+  function focusEditor() {
+    txt_obj.focus();
+  }
+  setTimeout( "focusEditor()", 500) ;
+}
+
