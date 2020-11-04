@@ -45,10 +45,6 @@ def generate_html(data2lint, message, action):
 """ + generate_form(data2lint, action) + """
         <center><div class="message">""" + message + """</div></center>
 
-  <script>
-    setEditorFocus();
-  </script>
-
   </body>
 </html>
 

@@ -45,10 +45,6 @@ def generate_html(data2lint, message, action):
         <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="40" /></a><h1>The Good, the Bad and the JSON</h1>
 """ + generate_form(data2lint, action) + """        <center><div class="message">""" + message + """</div></center>
 
-  <script>
-    setEditorFocus();
-  </script>
-
   </body>
 
 </html>

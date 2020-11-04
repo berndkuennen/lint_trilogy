@@ -1,0 +1,39 @@
+---
+# yaml & json lint application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lint-trilogy
+spec:
+  selector:
+    matchLabels:
+      app: lint-trilogy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lint-trilogy
+    spec:
+      containers:
+        - name: lint-trilogy
+          image: docdiesel/lint_trilogy:1.2.1
+          # w.i.p.; for OpenShift
+          # securityContext:
+          #  allowPrivilegeEscalation: false
+          #  runAsUser: 0
+          ports:
+            - containerPort: 80
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: linttrilogy-service
+spec:
+  selector:
+    app: lint-trilogy
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

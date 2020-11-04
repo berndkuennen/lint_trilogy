@@ -21,6 +21,7 @@ Btw., the name of the project refers to the [Dollars Trilogy](https://en.wikiped
 This project is based on the valuable work of many other people. Thanks to the following people or organizations:
 * Sebastián Ramírez (aka [tiangolo](https://github.com/tiangolo)) for the docker image
 * Jacob Kelley for [Behave.js](https://jakiestfu.github.io/Behave.js/) which is the foundation for the [editor](https://embed.plnkr.co/plunk/EKgvbm).
+* Francesco Linza for improving the Javascript editor code.
 
 ## Licensing
 The code is under [MIT license](License.txt). The lint trilogy logo is under CC BY-SA 4.0.
@@ -30,9 +31,11 @@ The code is under [MIT license](License.txt). The lint trilogy logo is under CC 
 ## Docker
 Build an image and run it with the following commands:
 ```
-docker build -t lint_a_yaml .
-docker run  -p 80:80  --name lintayaml lint_a_yaml
+docker build -t lint_trilogy .
+docker run  -p 80:8080  --name leone lint_trilogy
 ```
+
+Ready to go images may be found on docker hub at https://hub.docker.com/repository/docker/docdiesel/lint_trilogy . For running docdiesel/lint_trilogy on kubernetes, please refer to the sample [deplyoment.yml](deplyoment.yml). Note: Due to the restrictions that OpenShift/OKD have regarding containers running as root it's not possible _yet_ to run lint_trilogy on these platforms.
 
 ----
 
