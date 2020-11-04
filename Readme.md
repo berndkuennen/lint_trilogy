@@ -35,7 +35,7 @@ docker build -t lint_trilogy .
 docker run  -p 80:8080  --name leone lint_trilogy
 ```
 
-Ready to go images may be found on docker hub at https://hub.docker.com/repository/docker/docdiesel/lint_trilogy . For running docdiesel/lint_trilogy on kubernetes, please refer to the sample [deplyoment.yml](deplyoment.yml). Note: Due to the restrictions that OpenShift/OKD have regarding containers running as root it's not possible _yet_ to run lint_trilogy on these platforms.
+Ready to go images may be found on docker hub at https://hub.docker.com/repository/docker/docdiesel/lint_trilogy . For running docdiesel/lint_trilogy on kubernetes, please refer to the sample [deployment.yml](deployment.yml). Note: Due to the restrictions that OpenShift/OKD have regarding containers running as root it's not possible _yet_ to run lint_trilogy on these platforms.
 
 ----
 

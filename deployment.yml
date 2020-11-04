@@ -22,7 +22,7 @@ spec:
           #  allowPrivilegeEscalation: false
           #  runAsUser: 0
           ports:
-            - containerPort: 80
+            - containerPort: 8080
 
 ---
 # Service
@@ -36,4 +36,6 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
+
+
