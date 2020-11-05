@@ -4,16 +4,16 @@
 # Lint Trilogy
 
 ## TL;DR
-This project provides some tools to lint your YAML, XML or JSON via HTTP requests, including a comfortable form based HTML page and some simple POST interfaces which are returning the result e.g. as JSON or CSV.
+This project provides some tools to lint your YAML, XML or JSON via HTTP requests, including a comfortable form based HTML editor and some simple POST interfaces which are returning the result e.g. as JSON or CSV.
 
 ## Where to lint my YAML/XML/JSON - securely?
 I quite often write YAML or JSON  files and I find it handy to check it at (yaml|json)lint.com. But sometimes there's sensible data in the YAML that should not be given to a third party - so I decided to write my own xxxxlint webservice.
 
-Technically it's a flask/uwsgi webserver with some python scripts, based on the tiangolo/uwsgi-nginx-flask docker image. There's a form for comfortably entering and editing the YAML, including automatic resizing and line numbering. 
+Technically it's a flask/uwsgi webserver with some python scripts, based on the [tiangolo/uwsgi-nginx-flask](https://github.com/tiangolo/uwsgi-nginx-flask-docker) docker image. There's a form for comfortably entering and editing the YAML/XML/JSON, including automatic resizing and line numbering. 
 
 If you want to use it for automation, e.g. in CI/CD processes, you may use one of the POST interfaces which are answering in JSON, CSV or plain text (see below).
 
-In the future, I want to add more linters (e.g. for XML) or converters (e.g. base64) so this becomes a useful multi purpose tool.
+In the future, I want to add more linters or converters (e.g. base64) so that this could become a useful multi purpose tool.
 
 Btw., the name of the project refers to the [Dollars Trilogy](https://en.wikipedia.org/wiki/Dollars_Trilogy).
 
@@ -32,7 +32,7 @@ The code is under [MIT license](License.txt). The lint trilogy logo is under CC 
 Build an image and run it with the following commands:
 ```
 docker build -t lint_trilogy .
-docker run  -p 80:8080  --name sergio lint_trilogy
+docker run  -p 80:8080  --name eastwood lint_trilogy
 ```
 
 Ready to go images may be found on docker hub at https://hub.docker.com/repository/docker/docdiesel/lint_trilogy . For running docdiesel/lint_trilogy on kubernetes, please refer to the sample [deployment.yml](deployment.yml). Note: Due to the restrictions that OpenShift/OKD have regarding containers running as root it's not possible _yet_ to run lint_trilogy on these platforms.
@@ -96,7 +96,7 @@ true
 These are the interfaces to lint a XML. Choose one according to your needs. Error details reporting is not implemented _yet_.
 
 ### /lint/xml/form
-This page offers a comfortable HTML form to enter a XML and lint it. On clicking the button, the app checks the XML and gives feedback as an unordered list, or, in best case, tells you that the XML is valid.
+This page offers a comfortable HTML form to enter a XML and lint it. On clicking the button, the app checks the XML and gives feedback as an unordered list (to be implemented), or, in best case, tells you that the XML is valid.
  
 ### /lint/xml/csv
 This interface accepts POST requests and awaits the XML in the field _data2lint_. Response is given as CSV list (content type text/csv), which remains empty (zero lines) if the XML is valid.
@@ -108,14 +108,14 @@ $ curl -X POST -d 'data2lint=<xml>no</yaml>'  http://192.168.99.101/lint/xml/csv
 ```
 
 ### /lint/xml/json
-This interface accepts POST requests and awaits the XML in the field _data2lint_. Response is given as JSON structure (content type application/json) with the man key "value" as response which is telling with a _true_ or _false_ if the XMl is valid. If there's errors, you'll find an array with line number, column and description. 
+This interface accepts POST requests and awaits the XML in the field _data2lint_. Response is given as JSON structure (content type application/json) with the main key "valid" as response which is giving you the result _true_ or _false_. If there's errors, you'll find an array with line number, column and description (to be implemented). 
 
 Examples:
 ```
 $ curl -X POST -d 'data2lint=<xml></xml>'  http://192.168.99.101/lint/xml/json
 {"valid": true}
 
-$ curl -X POST -d 'data2lint={ "this": is no xml }'  http://192.168.99.101/lint/xml/json
+$ curl -X POST -d 'data2lint=<this>is no<xml>'  http://192.168.99.101/lint/xml/json
 {
     "errors": [
         {
@@ -133,7 +133,7 @@ This interface accepts POST requests and awaits the XML in the field _data2lint_
 
 Example:
 ```
-$ curl -X POST -d 'data2lint={ "this": is no json }'  http://192.168.99.101/lint/xml/valid
+$ curl -X POST -d 'data2lint=<this>is no<xml>'  http://192.168.99.101/lint/xml/valid
 false
 ```
 
@@ -155,7 +155,7 @@ $ curl -X POST -d 'data2lint={ "this": is no json }'  http://192.168.99.101/lint
 ```
 
 ### /lint/json/json
-This interface accepts POST requests and awaits the JSON in the field _data2lint_. Response is given as JSON structure (content type application/json) with the man key "value" as response which is telling with a _true_ or _false_ if the YAMl is valid. If there's errors, you'll find an array with line number, column and description. 
+This interface accepts POST requests and awaits the JSON in the field _data2lint_. Response is given as JSON structure (content type application/json) with the main key "valid" as response giving you the result _true_ or _false_. If there's errors, you'll find an array with line number, column and description. 
 
 Examples:
 ```

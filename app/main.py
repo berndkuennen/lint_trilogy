@@ -43,9 +43,9 @@ def render_main_html():
   </head>
 
   <body>
-    <img src="/static/img/FistfulOfYaml.jpg" width="120" />
-    <h1>Lint trilogy</h1>
-    <p>This service offers the possibility to lint data in <a href="/lint/yaml/form">YaML</a> and <a href="/lint/json/form">JSON</a>. A third linter will follow.</p>
+    <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="120" /></a>
+    <h1>Lint Trilogy</h1>
+    <p>This service offers the possibility to lint data in <a href="/lint/yaml/form">YaML</a>, <a href="/lint/xml/form">XML</a> and <a href="/lint/json/form">JSON</a>. Click on the logo to come back to this main page.</p>
 """ + generate_form("#\n#place your json or yaml here\n#","") + """
 
   <br>
