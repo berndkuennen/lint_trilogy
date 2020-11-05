@@ -17,6 +17,7 @@ def generate_form(data2lint, action):
     if action == "":
       form += """
         <input type="submit" value="Lint YAML" onclick="javascript: form.action='/lint/yaml/form';">
+        <input type="submit" value="Lint XML"  onclick="javascript: form.action='/lint/xml/form';" >
         <input type="submit" value="Lint JSON" onclick="javascript: form.action='/lint/json/form';"> 
 """
     else:

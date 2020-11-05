@@ -4,6 +4,7 @@ from flask import request
 
 from lint_yaml import lint_yaml
 from lint_json import lint_json
+from lint_xml  import lint_xml
 
 from general import generate_form
 
@@ -11,6 +12,7 @@ app  = Flask(__name__)
 
 app.register_blueprint(lint_yaml)
 app.register_blueprint(lint_json)
+app.register_blueprint(lint_xml)
 
 
 @app.route("/")

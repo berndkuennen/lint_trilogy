@@ -1,7 +1,7 @@
 FROM tiangolo/uwsgi-nginx-flask:python3.8
 
-LISTEN_PORT 8080
-EXPOSE      8080
+ENV LISTEN_PORT 8080
+EXPOSE          8080
 
 # patch section to make image runnable on OpenShift
 # see: https://github.com/tiangolo/uwsgi-nginx-flask-docker/issues/29
