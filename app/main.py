@@ -45,8 +45,8 @@ def render_main_html():
   <body>
     <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="120" /></a>
     <h1>Lint Trilogy</h1>
-    <p>This service offers the possibility to lint data in <a href="/lint/yaml/form">YaML</a>, <a href="/lint/xml/form">XML</a> and <a href="/lint/json/form">JSON</a>. Click on the logo to come back to this main page.</p>
-""" + generate_form("#\n#place your json or yaml here\n#","") + """
+    <p>This service offers the possibility to lint data in <a href="/lint/yaml/form">YaML</a>, <a href="/lint/xml/form">XML</a> and <a href="/lint/json/form">JSON</a>.<br>Click on the logo to come back to this main page.</p>
+""" + generate_form("","") + """
 
   <br>
   <p align="center" style="font-size:8pt;">(C) 2020 Bernd Künnen - Source on <a href="https://github.com/berndkuennen/lint_trilogy">GitHub</a></p>

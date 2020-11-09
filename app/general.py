@@ -10,7 +10,8 @@ def generate_form(data2lint, action):
 	<!-- autonumber & resize example inspired by https://embed.plnkr.co/plunk/EKgvbm -->
 	<div class="container">
 		<div class="line-nums"><span>1</span></div>
-		<textarea id="editor" name="data2lint" autofocus >""" + escape(data2lint) +"""</textarea>
+		<textarea id="editor" name="data2lint" autofocus
+		placeholder="place your yaml/xml/json here"></textarea>
 	</div>
 	<br/>
 """
