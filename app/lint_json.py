@@ -57,7 +57,7 @@ def generate_html(data2lint, message, action):
 @lint_json.route('/lint/json/form', methods = ['POST','GET'])
 def lint_jsonx():
     if request.method == 'GET':
-        return generate_html("{\n  \"key\": \"enter your json here\"\n}","","/lint/json/form")
+        return generate_html('', '', '/lint/json/form')
     else:
         message = "<h3>Result</h3><p>"
         errors = lint_the_json()

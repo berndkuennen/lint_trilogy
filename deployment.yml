@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: lint-trilogy
-          image: docdiesel/lint_trilogy:1.2.1
+          image: docdiesel/lint_trilogy:1.3.4
           # w.i.p.; for OpenShift
           # securityContext:
           #  allowPrivilegeEscalation: false

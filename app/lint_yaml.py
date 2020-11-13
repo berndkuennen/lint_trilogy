@@ -56,7 +56,7 @@ def generate_html(data2lint, message, action):
 @lint_yaml.route('/lint/yaml/form', methods = ['POST','GET'])
 def lint_yamlx():
     if request.method == 'GET':
-        return generate_html("---\nkey: \"enter your yaml here\"","",'/lint/yaml/form')
+        return generate_html('', '', '/lint/yaml/form')
     else:
         message = "<h3>Result</h3><p>"
         errors = lint_the_yaml()

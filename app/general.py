@@ -11,7 +11,7 @@ def generate_form(data2lint, action):
 	<div class="container">
 		<div class="line-nums"><span>1</span></div>
 		<textarea id="editor" name="data2lint" autofocus
-		placeholder="place your yaml/xml/json here"></textarea>
+		placeholder="place your yaml/xml/json here">""" + escape(data2lint) + """</textarea>
 	</div>
 	<br/>
 """

@@ -19,15 +19,22 @@ def lint_the_xml():
     # works for key:value POSTs
     data = request.form['data2lint'] # a multidict containing POST data
 
+    if data == "" :
+        error = {}
+        error['line']   = 1
+        error['column'] = 1
+        error['desc']   = "Expecting value"
+        return [ error ]
+
     try:
         doc = etree.parse(StringIO(data))
         return []
+
     except etree.XMLSyntaxError as err:
-        #print("json is invalid")
         error = {}
-        error['line']   = 0
-        error['column'] = 0
-        error['desc']   = "error printing to be implemented" # str(err.error_log)  # err.msg
+        error['line']   = err.lineno
+        error['column'] = err.offset
+        error['desc']   = err.msg
         return [ error ]
 
 
@@ -61,7 +68,7 @@ def generate_html(data2lint, message, action):
 @lint_xml.route('/lint/xml/form', methods = ['POST','GET'])
 def lint_xmlx():
     if request.method == 'GET':
-        return generate_html("---\nkey: \"enter your xml here\"","",'/lint/xml/form')
+        return generate_html("", "", "/lint/yaml/form")
     else:
         message = "<h3>Result</h3><p>"
         errors = lint_the_xml()
