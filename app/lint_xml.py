@@ -11,13 +11,13 @@ from io   import StringIO
 import json
 from html import escape
 
-from general import generate_form
+from general import generate_form, generate_head
 
 
 #== take the posted xml (if any) and lint it
 def lint_the_xml():
     # works for key:value POSTs
-    data = request.form['data2lint'] # a multidict containing POST data
+    data = request.form['data'] # a multidict containing POST data
 
     if data == "" :
         error = {}
@@ -40,27 +40,13 @@ def lint_the_xml():
 
 #== generate HTML for the editor
 def generate_html(data2lint, message, action):
-    html = """
-<!DOCTYPE html>
-<html>
+    html = (generate_head()			+
+            """<h1>For a Few XML More</h1> """	+
+            generate_form(data2lint, action)	+
+            """<center><div class="message">"""	+
+            message				+
+            """</div></center></body></html>"""	)
 
-  <head>
-    <!-- script data-require="angularjs@1.3.6" data-semver="1.3.6" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.6/angular.min.js"></script -->
-    <script data-require="angularjs@1.3.6" data-semver="1.3.6" src="/static/js/angular.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css" />
-    <script type="text/javascript" src="/static/js/behave.js"></script>
-    <script type="text/javascript" src="/static/js/script.js"></script>
-  </head>
-
-  <body>
-        <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="40" /></a><h1>For a Few XML More</h1>
-""" + generate_form(data2lint, action) + """
-        <center><div class="message">""" + message + """</div></center>
-
-  </body>
-</html>
-
-"""
     return html
 
 
@@ -81,7 +67,7 @@ def lint_xmlx():
             message += "The XML is <b style='color:green;'>valid</b>.\n"
         message += "</p>"
 
-        return generate_html( request.form['data2lint'], message, "/lint/xml/form" )
+        return generate_html( request.form['data'], message, "/lint/xml/form" )
 
 
 #== answer POST with JSON

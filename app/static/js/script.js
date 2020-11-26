@@ -63,3 +63,24 @@ function setEditorFocus(txt_obj) {
 function triggerKeyDownEvent(element) {
   element.dispatchEvent(new KeyboardEvent('keydown', { 'key': '' }));
 }
+
+
+// -- copy base64 string to clipboard
+
+function addCopyPasteListener() {
+  var copyB64InputBtn = document.querySelector('.copyBtn');
+
+  copyB64InputBtn.addEventListener('click', function(event) {
+    var copyB64Input = document.querySelector('.b64input');
+    copyB64Input.focus();
+    copyB64Input.select();
+
+    try {
+      var success = document.execCommand('copy');
+      var msg = success ? 'successfully' : 'unsuccessfully';
+      console.log('text copied ' + msg);
+    } catch (err) {
+      console.log('Unknown error on copying text to clipboard');
+    }
+  });
+}

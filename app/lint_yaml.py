@@ -11,7 +11,7 @@ from yamllint import linter
 import json
 from html import escape
 
-from general import generate_form
+from general import generate_form, generate_head
 
 # configure yaml linter
 conf = YamlLintConfig(file='.yamllint')
@@ -19,7 +19,7 @@ conf = YamlLintConfig(file='.yamllint')
 #== take the posted yaml (if any) and lint it
 def lint_the_yaml():
     # works for key:value POSTs
-    data = request.form['data2lint'] # a multidict containing POST data
+    data = request.form['data'] # a multidict containing POST data
 
     # for binary upload, not properly working:
     #data = request.files['yaml'] # .read()
@@ -28,27 +28,12 @@ def lint_the_yaml():
 
 #== generate HTML for the editor
 def generate_html(data2lint, message, action):
-    html = """
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <!-- script data-require="angularjs@1.3.6" data-semver="1.3.6" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.6/angular.min.js"></script -->
-    <script data-require="angularjs@1.3.6" data-semver="1.3.6" src="/static/js/angular.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css" />
-    <script type="text/javascript" src="/static/js/behave.js"></script>
-    <script type="text/javascript" src="/static/js/script.js"></script>
-  </head>
-
-  <body>
-        <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="40" /></a><h1>A Fistful of YAML</h1>
-""" + generate_form(data2lint, action) + """
-        <center><div class="message">""" + message + """</div></center>
-
-  </body>
-</html>
-
-"""
+    html = (generate_head() +
+            """<h1>A Fistful of YAML</h1>""" +
+            generate_form(data2lint, action) +
+            """<center><div class="message">""" + 
+            message +
+            """</div></center></body></html>""" )
     return html
 
 
@@ -69,7 +54,7 @@ def lint_yamlx():
             message += "The YaML is <b style='color:green;'>valid</b>.\n"
         message += "</p>"
 
-        return generate_html( request.form['data2lint'], message, "/lint/yaml/form" )
+        return generate_html( request.form['data'], message, "/lint/yaml/form" )
 
 
 #== answer POST with JSON

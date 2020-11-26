@@ -8,12 +8,12 @@ lint_json = Blueprint('lint_json', __name__)
 import json
 from html import escape
 
-from general import generate_form
+from general import generate_form, generate_head
 
 #== take the posted json (if any) and lint it
 def lint_the_json():
     # works for key:value POSTs
-    data = request.form['data2lint'] # a multidict containing POST data
+    data = request.form['data'] # a multidict containing POST data
     try:
         j = json.loads(data)
         #print("json is valid")
@@ -29,27 +29,13 @@ def lint_the_json():
 
 #== generate HTML for the editor
 def generate_html(data2lint, message, action):
-    html = """
-<!DOCTYPE html>
-<html>
+    html = (generate_head()					+
+            """<h1>The Good, the Bad and the JSON</h1> """	+
+            generate_form(data2lint, action)			+
+            """<center><div class="message">"""			+
+            message						+
+            """</div></center></body></html>"""			)
 
-  <head>
-    <!-- script data-require="angularjs@1.3.6" data-semver="1.3.6" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.6/angular.min.js"></script -->
-    <script data-require="angularjs@1.3.6" data-semver="1.3.6" src="/static/js/angular.min.js"></script>
-    <link rel="stylesheet" href="/static/style.css" />
-    <script type="text/javascript" src="/static/js/behave.js"></script>
-    <script type="text/javascript" src="/static/js/script.js"></script>
-  </head>
-
-  <body>
-        <a href="/"><img src="/static/img/FistfulOfYaml.jpg" width="40" /></a><h1>The Good, the Bad and the JSON</h1>
-""" + generate_form(data2lint, action) + """        <center><div class="message">""" + message + """</div></center>
-
-  </body>
-
-</html>
-
-"""
     return html
 
 
@@ -66,10 +52,10 @@ def lint_jsonx():
             for error in errors:
                 message += "<li>Line " + str(error['line']) + ", column " + str(error['column']) + ": " + escape(error['desc']) + "\n"
             message += "</ul>"
-            data4form = request.form['data2lint']
+            data4form = request.form['data']
         else:
             message += "The JSON is <b style='color:green;'>valid</b>.\n"
-            data4form = json.dumps( json.loads(request.form['data2lint']), indent=4, sort_keys=True )
+            data4form = json.dumps( json.loads(request.form['data']), indent=4, sort_keys=True )
         message += "</p>"
 
         return generate_html( data4form, message, "/lint/json/form" )

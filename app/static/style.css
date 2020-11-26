@@ -5,6 +5,7 @@ body{
 	font-family: Helvetica, Arial, sans-serif;
 	text-align:center;
 	padding:50px;
+	align-items: center;
 }
 		
 textarea{
@@ -13,18 +14,32 @@ textarea{
 	/* The following three rules make a difference in the script */
 	overflow:hidden;
 	line-height: 13px;
-	font-size: 13px;
+	font-size:   13px;
 			
-	border:1px solid #999;
-	padding:10px;
+	border:      1px solid #999;
+	padding:     10px;
 	font-family: monospace;
-	margin:0;
-	display:block;
-	outline:none;
+	margin:      0;
+	display:     block;
+	outline:     none;
 }
 
 textarea:focus{
-  border-color:#336;
+	border-color:#336;
+}
+
+input#encodedData{
+	width:		600px;
+        line-height:	13px;
+        font-size:	13px;
+        border:		1px solid #999;
+        padding:	10px;
+        font-family:	monospace;
+}
+
+input.b64input:focus{
+	border-color:#336;
+	outline: none;
 }
 
 .container{
@@ -33,21 +48,29 @@ textarea:focus{
 }
 
 .line-nums{
-	font-size:13px;
-	line-height:13px;
-	padding:10px 4px;
+	font-size:   13px;
+	line-height: 13px;
+	padding:     10px 4px;
 	font-family: monospace;
-	background: #EEE;
-	position: absolute;
-	width: 20px;
-	left: -28px;
-	bottom: 0;
-	top: 0;
-	text-align:right;
-	border:1px solid #999;
+	background:  #EEE;
+	position:    absolute;
+	width:      20px;
+	left:      -28px;
+	bottom:     0;
+	top:        0;
+	text-align: right;
+	border:     1px solid #999;
 }
 
 div.message{
-	width:600px;
-	text-align:left;
+	width:      600px;
+	text-align: left;
 }
+
+button.copyBtn{
+	margin-left: -4px;
+	font-size: 14px;
+	border:    none;
+}
+
+
