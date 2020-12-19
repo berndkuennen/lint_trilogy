@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lint-trilogy
+spec:
+  selector:
+    app: lint-trilogy
+  ports:
+    - name: http8080
+      protocol: TCP
+      port: 80
+      targetPort: 8080

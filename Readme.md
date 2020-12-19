@@ -39,6 +39,13 @@ Ready to go images may be found on [docker hub](https://hub.docker.com/repositor
 
 ----
 
+## OpenShift / OKD
+Since v1.6 Lint-Trilogy is able to run on OpenShift. Old versions failed on starting uwsgi etc. when OCP denied write access to files/sockets because the uid was not root (0). Still, OCP gives you root gid, so the trick is to set the files needed to be writeable to g+rw.
+
+Use the example files in [yaml/](yaml/) to deploy Lint Trilogy to OCP/OKD.
+
+----
+
 Read more about the functionality of the several modules in the following
 documents.
 

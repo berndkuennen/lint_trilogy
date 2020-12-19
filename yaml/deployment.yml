@@ -1,0 +1,23 @@
+---
+# yaml & json lint application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lint-trilogy
+spec:
+  selector:
+    matchLabels:
+      app: lint-trilogy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lint-trilogy
+    spec:
+      imagePullSecrets:
+        - name: regsecret
+      containers:
+        - name: lint-trilogy
+          image: docdiesel/lint_trilogy:1.6
+          ports:
+            - containerPort: 8080
