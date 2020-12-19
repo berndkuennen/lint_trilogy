@@ -4,7 +4,7 @@
 # Lint Trilogy
 
 ## TL;DR
-This project provides some tools to lint your **YAML**, **XML** or **JSON** via HTTP requests, including a comfortable form based HTML editor and some simple POST interfaces which are returning the result e.g. as JSON or CSV. Furthermore it offers the possibility to encode the (linted) data to **base64**.
+This project provides some tools to lint your **YAML**, **XML** or **JSON** via HTTP requests, including a comfortable form based HTML editor and some simple POST interfaces which are returning the result e.g. as JSON or CSV. Furthermore it offers the possibility to encode the (linted) data to **base64** (plain or gzipped).
 
 ## Where to lint my YAML/XML/JSON - safely?
 I quite often write YAML or JSON  files and I find it handy to check it at (yaml|json)lint.com. But sometimes there's sensible data in the YAML that should not be given to a third party - so I decided to write my own xxxxlint webservice.
@@ -16,6 +16,10 @@ If you want to use it for automation, e.g. in CI/CD processes, you may use one o
 In the future, I want to add more linters or converters (e.g. base64&gzip) so that this could become a useful multi purpose tool.
 
 Btw., the name of the project refers to the [Dollars Trilogy](https://en.wikipedia.org/wiki/Dollars_Trilogy).
+
+## Features
+* lint your yaml, json, xml
+* encode your data to base64, plain or gzipped (which sometimes is used to store secrets in kubernetes)
 
 ## Credits
 This project is based on the valuable work of many other people. Thanks to the following people or organizations:
