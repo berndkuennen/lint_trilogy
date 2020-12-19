@@ -32,7 +32,7 @@ def generate_form(data2lint, action):
       if module == 'conv':
         form += """
           <input type="submit" value="base64"       onclick="javascript: form.action='/conv/base64/form'; ">
-          <input type="button" value="base64/gzip"  onclick="javascript: alert('Function not implemented yet'); ">
+          <input type="submit" value="base64/gzip"  onclick="javascript: form.action='/conv/gzip64/form'; ">
           <input type="button" value="base64/bzip2" onclick="javascript: alert('Function not implemented yet'); ">\n"""
 
     else:
@@ -40,7 +40,8 @@ def generate_form(data2lint, action):
       if module == 'lint':
         form += """<input type="submit" value="Lint"/>&nbsp;"""
 
-      form += """<input type="submit" value="Encode"  onclick="javascript: form.action='/conv/base64/form';" >\n"""
+      form += """<input type="submit" value="base64"       onclick="javascript: form.action='/conv/base64/form';" >\n"""
+      form += """<input type="submit" value="gzip/base64"  onclick="javascript: form.action='/conv/gzip64/form';" >\n"""
 
     form += """
         </form>\n"""

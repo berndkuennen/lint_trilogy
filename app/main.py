@@ -6,6 +6,7 @@ from lint_yaml    import lint_yaml
 from lint_json    import lint_json
 from lint_xml     import lint_xml
 from conv_base64  import conv_base64
+from conv_gzip64  import conv_gzip64
 
 from general import generate_form,generate_head
 
@@ -15,6 +16,7 @@ app.register_blueprint(lint_yaml)
 app.register_blueprint(lint_json)
 app.register_blueprint(lint_xml)
 app.register_blueprint(conv_base64)
+app.register_blueprint(conv_gzip64)
 
 
 @app.route("/")
