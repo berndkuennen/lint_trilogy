@@ -1,0 +1,24 @@
+---
+# yaml & json lint application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-needs-root
+spec:
+  selector:
+    matchLabels:
+      app: image-needs-root
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: image-needs-root
+    spec:
+      # w/o security context, the pod will end in CrashLoopBackOff
+      # with log msg "cannot create /etc/nginx/nginx.conf: Permission denied"
+      containers:
+        - name: flask-nonroot
+          image: tiangolo/uwsgi-nginx-flask:python3.8
+          ports:
+            - containerPort: 80
+

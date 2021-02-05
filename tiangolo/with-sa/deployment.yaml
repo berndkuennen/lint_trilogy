@@ -1,0 +1,46 @@
+---
+# yaml & json lint application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiangolo-with-sa
+spec:
+  selector:
+    matchLabels:
+      app: tiangolo-with-sa
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tiangolo-with-sa
+    spec:
+      # security context, important in OpenShift & OKD
+      #   - create a service account to run as anyuid:
+      #       oc create sa  my-sa-with-anyuid
+      #       oc adm policy add-scc-to-user anyuid -z my-sa-with-anyuid
+      #
+      securityContext:
+        fsGroup: 0
+      serviceAccount: my-sa-with-anyuid
+      serviceAccountName: my-sa-with-anyuid
+
+      containers:
+        - name: tiangolo-with-sa
+          image: tiangolo/uwsgi-nginx-flask:python3.8
+          ports:
+            - containerPort: 80
+---
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  name: tiangolo-with-sa
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: tiangolo-with-sa
+  sessionAffinity: None
+  type: ClusterIP

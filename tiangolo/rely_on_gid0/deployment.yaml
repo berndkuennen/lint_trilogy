@@ -1,0 +1,38 @@
+---
+# yaml & json lint application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-nonroot
+spec:
+  selector:
+    matchLabels:
+      app: flask-nonroot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask-nonroot
+    spec:
+      # no security context needed; deployment relies on
+      # running as gid=0 which is given in OCP & OKD
+      containers:
+        - name: flask-nonroot
+          image: docdiesel/tiangolo-x:0.2.0
+          ports:
+            - containerPort: 8080
+---
+# service for accessing flask-nonroot
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-nonroot
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: flask-nonroot
+  sessionAffinity: None
+  type: ClusterIP
