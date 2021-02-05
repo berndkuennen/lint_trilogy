@@ -1,5 +1,8 @@
 ---
-# yaml & json lint application
+# example tiangolo uwsgi deployment
+# - on OCP/OKD this will fail
+#   <-> the pod runs as non-root by default
+#
 apiVersion: apps/v1
 kind: Deployment
 metadata:

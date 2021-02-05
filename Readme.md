@@ -48,6 +48,11 @@ Since v1.6 Lint-Trilogy is able to run on OpenShift. Old versions failed on star
 
 Use the example files in [yaml/](yaml/) to deploy Lint Trilogy to OCP/OKD.
 
+### The tiangolo/uwsgi-nginx-flask image and OpenShift
+The base image needs to run as root user which OCP/OKD deny by default. Thus it needs some tricks
+to bypass this. The [Readme](tiangolo/Readme.md) in the tiangolo subfolder shows you what your options are.
+Accompanying you'll find some example deployment yaml files.
+
 ----
 
 Read more about the functionality of the several modules in the following
