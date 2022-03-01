@@ -18,7 +18,7 @@ import base64
 # configure yaml linter
 conf = YamlLintConfig(file='.yamllint')
 
-#== take the posted yaml (if any) and lint it
+#== take the posted text (if any) and lint it
 def encodeData():
     # works for key:value POSTs
     data = request.form['data'] # a multidict containing POST data
@@ -60,7 +60,7 @@ def conv_base64x():
         Use the button on the left side to copy the data to the clipboard.
         </p>
         <script> addCopyPasteListener(); </script>
-        
+
         """
 
         return generate_html( request.form['data'], message, encoded, "/conv/base64/form" )
